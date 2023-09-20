@@ -1,12 +1,12 @@
 const mockClients = {
-  get: jest.fn(),
-  matchAll: jest.fn(),
+  get: vitset.fn(),
+  matchAll: vitset.fn(),
 };
-const mockSendToClient = jest.fn();
+const mockSendToClient = vitset.fn();
 
-jest.mock('./mockServiceWorker', () => ({
+vitset.mock('./mockServiceWorker', () => ({
   self: {
-    addEventListener: jest.fn(),
+    addEventListener: vitset.fn(),
     clients: mockClients,
   },
   sendToClient: mockSendToClient,
@@ -22,7 +22,7 @@ describe('message event listener', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vitset.clearAllMocks();
   });
 
   test('should handle KEEPALIVE_REQUEST', async () => {

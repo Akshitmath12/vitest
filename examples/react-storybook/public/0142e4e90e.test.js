@@ -5,7 +5,7 @@ describe('mockServiceWorker', () => {
 
   beforeAll(() => {
     global.self = {};
-    addEventListenerSpy = jest.spyOn(global.self, 'addEventListener');
+    addEventListenerSpy = vitset.spyOn(global.self, 'addEventListener');
   });
 
   afterEach(() => {
@@ -23,11 +23,11 @@ describe('mockServiceWorker', () => {
 
   test('should call clients.claim() when "activate" event is fired', () => {
     const mockEvent = {
-      waitUntil: jest.fn(),
+      waitUntil: vitset.fn(),
     };
 
     const mockClients = {
-      claim: jest.fn(),
+      claim: vitset.fn(),
     };
 
     global.self.clients = mockClients;

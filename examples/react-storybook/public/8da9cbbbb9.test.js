@@ -7,8 +7,8 @@ describe('Service Worker Install Event', () => {
   beforeAll(() => {
     // Mock the global 'self' object
     global.self = {
-      addEventListener: jest.fn(),
-      skipWaiting: jest.fn(),
+      addEventListener: vitset.fn(),
+      skipWaiting: vitset.fn(),
     };
 
     addEventListener = global.self.addEventListener;

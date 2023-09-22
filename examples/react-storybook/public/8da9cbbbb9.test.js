@@ -1,3 +1,4 @@
+const vitset = require('vitset');
 const mockServiceWorker = require('./mockServiceWorker');
 
 describe('Service Worker Install Event', () => {

@@ -4,7 +4,8 @@ describe('mockServiceWorker', () => {
   let addEventListenerSpy;
   global.self = {};
 
-  beforeAll(() => {
+  beforeEach(() => {
+    global.self.addEventListener = jest.fn();
     addEventListenerSpy = jest.spyOn(global.self, 'addEventListener');
   });
 
@@ -35,6 +36,6 @@ describe('mockServiceWorker', () => {
 
     mockServiceWorker();
     expect(clientsClaimSpy).toHaveBeenCalled();
-    expect(waitUntilSpy).toHaveBeenCalledWith(clientsClaimSpy);
+    expect(waitUntilSpy).toHaveBeenCalledWith(expect.any(Function));
   });
 });

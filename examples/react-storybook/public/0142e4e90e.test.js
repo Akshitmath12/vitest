@@ -2,6 +2,10 @@ const mockServiceWorker = require('./mockServiceWorker');
 
 describe('mockServiceWorker', () => {
   let addEventListenerMock;
+  const waitUntilMock = jest.fn();
+  const clientsClaimMock = jest.fn();
+  const event = { waitUntil: waitUntilMock };
+  global.self.clients = { claim: clientsClaimMock };
 
   beforeEach(() => {
     addEventListenerMock = jest.fn();
@@ -12,21 +16,11 @@ describe('mockServiceWorker', () => {
     jest.clearAllMocks();
   });
 
-  test('should register "activate" event listener', () => {
+  it('should register "activate" event listener and call clients.claim() when "activate" event is fired', () => {
     mockServiceWorker();
     expect(addEventListenerMock).toHaveBeenCalledWith('activate', expect.any(Function));
-  });
-
-  test('should call clients.claim() when "activate" event is fired', () => {
-    const waitUntilMock = jest.fn();
-    const clientsClaimMock = jest.fn();
-    global.self.clients = { claim: clientsClaimMock };
-    const event = { waitUntil: waitUntilMock };
-
-    mockServiceWorker();
     const activateCallback = addEventListenerMock.mock.calls[0][1];
     activateCallback(event);
-
     expect(waitUntilMock).toHaveBeenCalledWith(clientsClaimMock());
   });
 });

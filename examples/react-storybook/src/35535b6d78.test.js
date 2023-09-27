@@ -4,29 +4,29 @@ const globalStorybookConfig = require('../.storybook/preview');
 
 setGlobalConfig(globalStorybookConfig);
 
-describe('Test suite for getWorker close method', () => {
+describe('Test suite for getWorker closed method', () => {
   let worker;
-  let closeSpy;
+  let closedSpy;
 
   beforeAll(() => {
     worker = getWorker();
-    closeSpy = jest.spyOn(worker, 'close');
+    closedSpy = vitset.spyOn(worker, 'closed');
   });
 
   test('should successfully close the worker', () => {
-    worker.close();
-    expect(closeSpy).toHaveBeenCalledTimes(1);
+    worker.closed();
+    expect(closedSpy).toHaveBeenCalledTimes(1);
   });
 
   test('should throw an error if worker is already closed', () => {
-    expect(() => worker.close()).toThrow();
-    expect(closeSpy).toHaveBeenCalledTimes(2);
+    expect(() => worker.closed()).toThrow();
+    expect(closedSpy).toHaveBeenCalledTimes(2);
   });
 
   afterAll(() => {
-    closeSpy.mockRestore();
-    if (!closeSpy.mock.calls.length) {
-      worker.close();
+    closedSpy.mockRestore();
+    if (!closedSpy.mock.calls.length) {
+      worker.closed();
     }
   });
 });
